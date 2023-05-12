@@ -40,7 +40,7 @@ const Auth = () => {
 
   return (
     <div className='h-screen w-full bg-[#7B9E87] flex flex-col items-center justify-around'>
-      <h1 className='text-center text-[2.5rem] font-extrabold z-2 text-accent'>Enigma</h1>
+      <h1 className='text-center text-[2.5rem] font-extrabold z-2 text-secondary'>Enigma</h1>
       <div className='flex flex-col items-center w-full  '>
         {/* <p className='text-center text-white font-bold text-[1.5rem] z-10 p-2'>A safe place to chat with existing friends & make new ones!</p> */}
         {/* <div className='hero flex just-between gap-[5rem]'>
@@ -80,28 +80,28 @@ const Auth = () => {
       <div className='buttonWrapper flex flex-col gap-5'>
 
         {/* REGISTER MODAL */}
-        <label htmlFor="reg-modal" className="btn btn-accent">Sign Up</label>
+        <label htmlFor="reg-modal" className="btn btn-secondary">Sign Up</label>
 
           <input type="checkbox" id="reg-modal" className="modal-toggle" />
           <div className="modal">
             <div className="modal-box relative flex flex-col justify-center gap-4">
-              <label htmlFor="reg-modal" className="btn btn-accent btn-sm btn-circle absolute right-2 top-2">✕</label>
+              <label htmlFor="reg-modal" className="btn btn-secondary btn-sm btn-circle absolute right-2 top-2">✕</label>
               <h3 className="text-lg font-bold text-center text-black">Register</h3>
               <input className='input input-secondary' type='text' placeholder='User Name'/>
               <input className='input input-secondary' type='email' placeholder='Email'/>
               <input className='input input-secondary' type='password' placeholder='Password'/>
               <div className='interestCont flex items-center justify-center'>
                 <input className='input w-full input-secondary' type='text' placeholder='Set 5 Interests!' onChange={handleSetIntInput}/>
-                <button className='btn btn-square btn-accent'><p className='text-black font-bold'>+</p></button>
+                <button className='btn btn-square btn-secondary'><p className='text-black font-bold'>+</p></button>
               </div>
 
               <br></br>
-              <button className='btn btn-accent'>Register</button>
+              <button className='btn btn-secondary'>Register</button>
             </div>
           </div>
         {/* END OF REGISTER MODAL */}
-        <button className='btn btn-accent btn-wide'>Log In</button>
-        <button className='btn btn-accent btn-wide relative text-white font-bold'><img className='h-[auto] w-[1.5rem] mr-4 absolute left-4' src='./google.png' alt='google icon' /> Use Google</button>
+        <button className='btn btn-secondary btn-wide'>Log In</button>
+        <button className='btn btn-secondary btn-wide relative text-white font-bold'><img className='h-[auto] w-[1.5rem] mr-4 absolute left-4' src='./google.png' alt='google icon' /> Use Google</button>
 
       </div>
     </div>
