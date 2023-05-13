@@ -4,42 +4,12 @@ const Auth = () => {
   let [regForm, setRegForm] = useState(false); 
   let [logForm, setLogForm] = useState(false); 
 
-  let handleRegForm = () => {
-    let [regUserInput, setRegUserInput] = useState(''); 
-    let [regEmailInput, setRegEmailInput] = useState(''); 
-    let [regPassInput, setRegPassInput] = useState(''); 
-    let [regIntInput, setRegIntInput] = useState(''); 
-    let [interests, addInterest] = useState([]); 
-
-    let [logEmailInput, setLogEmailInput] = useState(''); 
-    let [logPassInput, setLogPassInput] = useState(''); 
-
-    setRegForm(regForm => !regForm)
-  }; 
-  let handleLogForm = () => {
-    setLogForm(logForm => !logForm)
-  }; 
-
-  let handleSetIntInput = (e) => { //? sets the interests input while you're typing
-    setRegIntInput(e.target.value)
-  }
-  let addToIntArray = () => {
-    if (interests.length <= 5) {
-      if (interests.length === 0) {
-        addInterest(regIntInput)
-        console.log(interests); 
-      } else {
-        addInterest(...interests, regIntInput)
-        console.log(interests)
-      }
-    } else if (interests.length > 5) {
-      let alertElement = document.createElement('')
-    }
-  }
+  
+    
 
 
   return (
-    <div className='h-screen w-full bg-[#7B9E87] flex flex-col items-center justify-around'>
+    <div className='initialWrapper h-screen w-full bg-[#454E9E] flex flex-col items-center justify-around'>
       <h1 className='text-center text-[2.5rem] font-extrabold z-2 text-secondary'>Enigma</h1>
       <div className='flex flex-col items-center w-full  '>
         {/* <p className='text-center text-white font-bold text-[1.5rem] z-10 p-2'>A safe place to chat with existing friends & make new ones!</p> */}
@@ -91,8 +61,8 @@ const Auth = () => {
               <input className='input input-secondary' type='email' placeholder='Email'/>
               <input className='input input-secondary' type='password' placeholder='Password'/>
               <div className='interestCont flex items-center justify-center'>
-                <input className='input w-full input-secondary' type='text' placeholder='Set 5 Interests!' onChange={handleSetIntInput}/>
-                <button className='btn btn-square btn-secondary'><p className='text-black font-bold'>+</p></button>
+                <input id='interestInput' className='input w-full input-secondary' type='text' placeholder='Set 5 Interests!' />
+                <button className='btn btn-square btn-secondary' ><p className='text-black font-bold'>+</p></button>
               </div>
 
               <br></br>
