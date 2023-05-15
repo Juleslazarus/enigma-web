@@ -1754,6 +1754,10 @@ html {
   bottom: 0px;
 }
 
+.left-2 {
+  left: 0.5rem;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -1886,12 +1890,20 @@ html {
   flex-wrap: wrap;
 }
 
+.items-end {
+  align-items: flex-end;
+}
+
 .items-center {
   align-items: center;
 }
 
 .justify-start {
   justify-content: flex-start;
+}
+
+.justify-end {
+  justify-content: flex-end;
 }
 
 .justify-center {

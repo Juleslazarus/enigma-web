@@ -40,9 +40,9 @@ const DrawerModal = () => {
 
   return (
     <div>
-        <div className="drawer flex flex-col-reverse">
+        <div className="drawer">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content">
+            <div className="drawer-content flex flex-col-reverse justify-end end">
                 {inbox ? <Inbox/> : null}
                 {favorites ? <Favorites/> : null}
                 {settings ? <Settings/> : null}
