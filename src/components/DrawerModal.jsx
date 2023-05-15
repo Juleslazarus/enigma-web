@@ -3,11 +3,13 @@ import React, { useState } from 'react'
 import Inbox from './Inbox'
 import Favorites from './Favorites'
 import Settings from './Settings'
+import { FaBars, FaInbox, FaHeart, FaGg } from 'react-icons/fa';
 
 const DrawerModal = () => {
     let [inbox, setInbox] = useState(true); 
     let [favorites, setFavorites] = useState(false); 
     let [settings, setSettings] = useState(false); 
+    let [darkMode, setDarkMode] = useState(false); 
 
     //? handle the drawer button states
     let handleInboxOn = () => {
@@ -31,11 +33,13 @@ const DrawerModal = () => {
 
     let nightModeToggle = () => {
         document.body.removeAttribute('data-theme')
-        document.body.setAttribute('data-theme', 'coffee')
+        document.body.setAttribute('data-theme', 'dark')
+        setDarkMode(true); 
     }
     let dayModeToggle = () => {
         document.body.removeAttribute('data-theme')
         document.body.setAttribute('data-theme', 'winter')
+        setDarkMode(false); 
     }
 
   return (
@@ -47,19 +51,20 @@ const DrawerModal = () => {
                 {favorites ? <Favorites/> : null}
                 {settings ? <Settings/> : null}
                 {/* different pages */}
-                <label htmlFor="my-drawer" className=" drawer-button">
-                <i className="fa-solid fa-bars text-2xl p-2"></i>
+                <label htmlFor="my-drawer" className={("drawer-button flex items-center h-[5%]" +  (darkMode ? "bg-gray-900" : "bg-slate-100"))}>
+                    <i htmlFor='my-drawer' className=" text-2xl m-2"><FaBars/></i>
+                    <h1 className='mr-[auto] ml-auto'>Enigma</h1>
                 </label>
             </div> 
             <div className="drawer-side">
                 <label id='closeDrawer' htmlFor="my-drawer" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-80 bg-base-100 text-base-content flex flex-col gap-4 ">
-                    <li className='bg-slate-100'><a className='text-black' onClick={handleInboxOn}><i className="fa-solid fa-inbox"></i> Inbox</a></li>
-                    <li className='bg-slate-100'><a className='text-black' onClick={handleFavoritesOn}><i className="fa-solid fa-heart"></i> Favorites</a></li>
-                    <li className='bg-slate-100'><a className='text-black' onClick={handleSettingsOn}><i className="fa-solid fa-gear"></i> Settings</a></li>
+                    <li className='bg-slate-100'><a className='text-black' onClick={handleInboxOn}><i className=""><FaInbox/></i> Inbox</a></li>
+                    <li className='bg-slate-100'><a className='text-black' onClick={handleFavoritesOn}><i className=""><FaHeart/></i> Favorites</a></li>
+                    <li className='bg-slate-100'><a className='text-black' onClick={handleSettingsOn}><i className=""><FaGear/></i> Settings</a></li>
                     <div className='bottomBar bg-slate-100 mt-[auto] flex items-center '>
-                        <li className='' ><a>Sign Out</a></li>
-                        <label className="swap swap-rotate">
+                        <li className='mr-[auto]' ><a>Sign Out</a></li>
+                        <label className="swap swap-rotate p-2" >
   
                             <input type="checkbox" />
                             
