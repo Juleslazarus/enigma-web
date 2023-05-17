@@ -1,15 +1,21 @@
-import { set } from 'firebase/database';
+import { child, get, ref, set } from 'firebase/database';
 import React, { useState } from 'react'
 import Inbox from './Inbox'
 import Favorites from './Favorites'
 import Settings from './Settings'
-import { FaBars, FaInbox, FaHeart, FaGg } from 'react-icons/fa';
+import { FaBars, FaInbox, FaHeart, FaCog } from 'react-icons/fa';
+import SearchModal from './SearchModal';
+import { auth, db } from './Firebase';
+import { signOut } from 'firebase/auth';
 
 const DrawerModal = () => {
     let [inbox, setInbox] = useState(true); 
     let [favorites, setFavorites] = useState(false); 
     let [settings, setSettings] = useState(false); 
     let [darkMode, setDarkMode] = useState(false); 
+
+    //? greet user on sign in 
+    
 
     //? handle the drawer button states
     let handleInboxOn = () => {
@@ -34,36 +40,88 @@ const DrawerModal = () => {
     let nightModeToggle = () => {
         document.body.removeAttribute('data-theme')
         document.body.setAttribute('data-theme', 'dark')
+        let inboxBtn = document.querySelector('.inboxBtn'); 
+        let favBtn = document.querySelector('.favBtn')
+        let settingsBtn = document.querySelector('.settingsBtn'); 
+        let bottomBar = document.querySelector('.bottomBar'); 
+        let header = document.querySelector('.header'); 
+
+        inboxBtn.classList.remove('bg-slate-100');
+        inboxBtn.classList.add('bg-gray-900'); 
+
+        favBtn.classList.remove('bg-slate-100'); 
+        favBtn.classList.add('bg-gray-900');
+
+        settingsBtn.classList.remove('bg-slate-100'); 
+        settingsBtn.classList.add('bg-gray-900'); 
+
+        bottomBar.classList.remove('bg-slate-100'); 
+        bottomBar.classList.add('bg-gray-900'); 
+
+        header.classList.remove('bg-slate-100'); 
+        header.classList.add('bg-gray-900'); 
+
         setDarkMode(true); 
     }
+
     let dayModeToggle = () => {
         document.body.removeAttribute('data-theme')
         document.body.setAttribute('data-theme', 'winter')
         setDarkMode(false); 
+
+        let inboxBtn = document.querySelector('.inboxBtn'); 
+        let favBtn = document.querySelector('.favBtn')
+        let settingsBtn = document.querySelector('.settingsBtn'); 
+        let bottomBar = document.querySelector('.bottomBar'); 
+        let header = document.querySelector('.header'); 
+
+        inboxBtn.classList.add('bg-slate-100');
+        inboxBtn.classList.remove('bg-gray-900'); 
+
+        favBtn.classList.add('bg-slate-100'); 
+        favBtn.classList.remove('bg-gray-900');
+
+        settingsBtn.classList.add('bg-slate-100'); 
+        settingsBtn.classList.remove('bg-gray-900'); 
+
+        bottomBar.classList.add('bg-slate-100'); 
+        bottomBar.classList.remove('bg-gray-900'); 
+
+        header.classList.add('bg-slate-100'); 
+        header.classList.remove('bg-gray-900'); 
+
+        setDarkMode(true); 
+    }
+
+    let signUserOut = () => {
+        auth.signOut(); 
     }
 
   return (
     <div>
-        <div className="drawer">
+        <div className="drawer border-2 border-blue-500">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content flex flex-col-reverse justify-end end">
+            <div className="modalWrapper drawer-content flex flex-col-reverse justify-end end">
+                <SearchModal/>
                 {inbox ? <Inbox/> : null}
                 {favorites ? <Favorites/> : null}
                 {settings ? <Settings/> : null}
                 {/* different pages */}
-                <label htmlFor="my-drawer" className={("drawer-button flex items-center h-[5%]" +  (darkMode ? "bg-gray-900" : "bg-slate-100"))}>
-                    <i htmlFor='my-drawer' className=" text-2xl m-2"><FaBars/></i>
+                <label className='header drawer-button flex items-center h-[5%] bg-slate-100'>
+                    <label htmlFor='my-drawer'>
+                        <i htmlFor='my-drawer' className=" text-2xl m-2 cursor-pointer"><FaBars/></i>
+                    </label>
                     <h1 className='mr-[auto] ml-auto'>Enigma</h1>
                 </label>
             </div> 
             <div className="drawer-side">
                 <label id='closeDrawer' htmlFor="my-drawer" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-80 bg-base-100 text-base-content flex flex-col gap-4 ">
-                    <li className='bg-slate-100'><a className='text-black' onClick={handleInboxOn}><i className=""><FaInbox/></i> Inbox</a></li>
-                    <li className='bg-slate-100'><a className='text-black' onClick={handleFavoritesOn}><i className=""><FaHeart/></i> Favorites</a></li>
-                    <li className='bg-slate-100'><a className='text-black' onClick={handleSettingsOn}><i className=""><FaGear/></i> Settings</a></li>
-                    <div className='bottomBar bg-slate-100 mt-[auto] flex items-center '>
-                        <li className='mr-[auto]' ><a>Sign Out</a></li>
+                    <li className='inboxBtn bg-slate-100 rounded-md'><a className='text-black' onClick={handleInboxOn}><i className=""><FaInbox/></i> Inbox</a></li>
+                    <li className='favBtn bg-slate-100 rounded-md'><a className='text-black' onClick={handleFavoritesOn}><i className=""><FaHeart/></i> Favorites</a></li>
+                    <li className='settingsBtn bg-slate-100 rounded-md'><a className='text-black' onClick={handleSettingsOn}><i className=""><FaCog/></i> Settings</a></li>
+                    <div className='bottomBar bg-slate-100 mt-[auto] rounded-lg flex items-center '>
+                        <li className='mr-[auto] btn btn-primary btn-outline btn-wide' onClick={signUserOut}><a>Sign Out</a></li>
                         <label className="swap swap-rotate p-2" >
   
                             <input type="checkbox" />

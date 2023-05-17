@@ -4,6 +4,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 import '../tailwind.css'
 import Auth from './components/Auth'
 import Landing from './components/Landing'
+import './styles/main.css'
 
 const App = () => {
     let [userAuth, setUserAuth] = useState(false); 

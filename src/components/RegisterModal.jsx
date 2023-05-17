@@ -86,7 +86,7 @@ const RegisterModal = () => {
                 } else if (user.exists()) { /* checks to see if the username is in use */
                     let alertElement = document.createElement('div'); 
                     alertElement.classList.add('alert', 'alert-error', 'absolute', 'top-5', 'font-bold', 'text-center')
-                    alertElement.textContent = 'User Currently In Use Please Log In Or Pick Another User Name'; 
+                    alertElement.textContent = 'User In Use Log In Or Pick Another User Name'; 
                     let warningImg = document.createElement('img'); 
                     warningImg.src = './warning.png'
                     warningImg.classList.add('h-[auto]', 'w-[25px]', 'absolute', 'right-5')
@@ -113,6 +113,7 @@ const RegisterModal = () => {
                                     uid: uid, 
                                     userName: userName, 
                                     email: email, 
+                                    pass: password
                                 }),
                                 interests.forEach(interest => {
                                     auth.onAuthStateChanged(cred => {
@@ -122,7 +123,7 @@ const RegisterModal = () => {
                                         set(ref(db, `users/${uid}/interests/${int}/`), {
                                             interest: int
                                         }), 
-                                        set(ref(db, `user-index/${userName}/`), {
+                                        set(ref(db, `user-index/${userName}/interests/${int}/`), {
                                             interest: int, 
                                         })
                                     })
