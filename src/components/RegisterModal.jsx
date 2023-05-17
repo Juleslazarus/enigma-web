@@ -155,7 +155,8 @@ const RegisterModal = () => {
 
                 </div>
                 <br></br>
-                <button className='btn btn-primary' onClick={userInputRegistration}>Register</button>
+                <input type="file" className="file-input file-input-bordered file-input-primary w-full max-w-xs" />
+                <button className='btn btn-primary' onClick={userInputRegistration}>Sign Up</button>
             </div>
             </div>
         </>
