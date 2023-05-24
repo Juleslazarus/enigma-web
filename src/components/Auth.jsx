@@ -11,7 +11,7 @@ const Auth = () => {
 
 
   return (
-    <div className='initialWrapper h-screen w-full bg-[#454E9E] flex flex-col items-center justify-around'>
+    <div className='initialWrapper h-screen w-full bg-[#454E9E] flex flex-col items-center justify-around mb-20 overflow-y-scroll'>
       <h1 className='text-center text-[2.5rem] font-extrabold z-2 text-white'>Enigma</h1>
       <div className='flex flex-col items-center w-full  '>
         {/* <p className='text-center text-white font-bold text-[1.5rem] z-10 p-2'>A safe place to chat with existing friends & make new ones!</p> */}
@@ -49,10 +49,9 @@ const Auth = () => {
           </div> 
         </div>
       </div>
-      <div className='buttonWrapper flex flex-col gap-5'>
+      <div className='buttonWrapper flex flex-col gap-5 '>
           <RegisterModal/>
           <LoginModal/>
-
       </div>
     </div>
   )
