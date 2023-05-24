@@ -143,9 +143,9 @@ const RegisterModal = () => {
             <div className="modal-box relative flex flex-col justify-center gap-4">
                 <label htmlFor="reg-modal" className="btn btn-primary btn-sm btn-circle absolute right-2 top-2" onClick={closeModal}>✕</label>
                 <h3 className="text-lg font-bold text-center text-black">Register</h3> 
-                <input className='userInput input input-primary' type='text' placeholder='User Name' value={userInput} onInput={(e) => {setUserInput(e.target.value)} }/>
-                <input className='emailInput input input-primary' type='email' placeholder='Email' value={emailInput} onInput={(e) => {setEmailInput(e.target.value)} }/>
-                <input className='passInput input input-primary' type='password' placeholder='Password' value={passInput} onInput={(e) => {setPassInput(e.target.value)} }/>
+                <input className='userInput input input-primary' type='text' placeholder='User Name' value={userInput} onInput={(e) => {setUserInput(e.target.value.toLowerCase())} }/>
+                <input className='emailInput input input-primary' type='email' placeholder='Email' value={emailInput} onInput={(e) => {setEmailInput(e.target.value.toLowerCase())} }/>
+                <input className='passInput input input-primary' type='password' placeholder='Password' value={passInput} onInput={(e) => {setPassInput(e.target.value.toLowerCase())} }/>
                 <div className='interestCont flex items-center justify-center'>
                     <input className='interestInput input w-full input-primary' type='text' placeholder='Set 5 Interests!' value={intInput} onKeyDown={handleIntEnterKey} onInput={(e) => { setIntInput(e.target.value);  }}/>
                     <button id='addBtn' className='btn btn-primary' onClick={handleInterests}>Add</button>
@@ -157,6 +157,7 @@ const RegisterModal = () => {
                 <br></br>
                 <input type="file" className="file-input file-input-bordered file-input-primary w-full max-w-xs" />
                 <button className='btn btn-primary' onClick={userInputRegistration}>Sign Up</button>
+                <button className='btn btn-ghost'>Forgot Credentials</button>
             </div>
             </div>
         </>

@@ -98,8 +98,8 @@ const DrawerModal = () => {
     }
 
   return (
-    <div>
-        <div className="drawer border-2 border-blue-500">
+    <div className='h-screen w-full overflow-hidden'>
+        <div className="drawer">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="modalWrapper drawer-content flex flex-col-reverse justify-end end">
                 <SearchModal/>
@@ -108,8 +108,8 @@ const DrawerModal = () => {
                 {settings ? <Settings/> : null}
                 {/* different pages */}
                 <label className='header drawer-button flex items-center h-[5%] bg-slate-100'>
-                    <label htmlFor='my-drawer'>
-                        <i htmlFor='my-drawer' className=" text-2xl m-2 cursor-pointer"><FaBars/></i>
+                    <label htmlFor='my-drawer' className='p-2'>
+                        <i htmlFor='my-drawer' className=" text-1xl m-2 cursor-pointer"><FaBars/></i>
                     </label>
                     <h1 className='mr-[auto] ml-auto'>Enigma</h1>
                 </label>

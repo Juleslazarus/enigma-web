@@ -51,7 +51,22 @@ const RegisterModal = () => {
                         setTimeout(() => {
                             modalWrapper.removeChild(alertElement)
                         }, 3500)
-                    }
+                    } 
+                })
+                .catch(err => {
+                    let alertElement = document.createElement('div'); 
+                        alertElement.classList.add('alert', 'alert-error', 'absolute', 'top-5', 'font-bold', 'text-center')
+                        alertElement.textContent = "User Credentials Don't Match Database"
+                        let warningImg = document.createElement('img'); 
+                        warningImg.src = './warning.png'
+                        warningImg.classList.add('h-[auto]', 'w-[25px]', 'absolute', 'right-5')
+                        alertElement.appendChild(warningImg); 
+                        //? append to modalWrapper
+                        let modalWrapper = document.querySelector('.modalWrapper'); 
+                        modalWrapper.appendChild(alertElement); 
+                        setTimeout(() => {
+                            modalWrapper.removeChild(alertElement)
+                        }, 3500)
                 })
         })
     }
