@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import RegisterModal from './RegisterModal';
 import LoginModal from './LoginModal'
+import '../styles/main.css'
 
 const Auth = () => {
   let [regForm, setRegForm] = useState(false); 
