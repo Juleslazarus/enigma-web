@@ -17,3 +17,7 @@ input:active {
   border: none;
   border-top-right-radius: 10px;
 }
+
+.initialWrapper {
+  overflow-y: scroll important;
+}
