@@ -42,16 +42,19 @@ const DrawerModal = () => {
         setInbox(true)
         setFavorites(false); 
         setSettings(false); 
+        let closeSpeedDial = document.getElementById('closeSpeedDial').click(); 
     }
     let speedDialFavoritesOn = () => {
         setInbox(false); 
         setFavorites(true); 
         setSettings(false); 
+        let closeSpeedDial = document.getElementById('closeSpeedDial').click(); 
     }
     let speedDialSettingsOn = () => {
         setInbox(false);
         setFavorites(false); 
         setSettings(true); 
+        let closeSpeedDial = document.getElementById('closeSpeedDial').click(); 
     }
 
 
