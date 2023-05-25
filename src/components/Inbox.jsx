@@ -50,7 +50,7 @@ const Inbox = () => {
           </div>
         </div>
       </div>
-      <SpeedDialModal/>
+      {/* <SpeedDialModal/> */}
 
     </div>
   )

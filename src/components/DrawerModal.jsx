@@ -38,6 +38,23 @@ const DrawerModal = () => {
         let closeDrawer = document.getElementById('closeDrawer').click()
     }
 
+    let speedDialInboxOn = () => {
+        setInbox(true)
+        setFavorites(false); 
+        setSettings(false); 
+    }
+    let speedDialFavoritesOn = () => {
+        setInbox(false); 
+        setFavorites(true); 
+        setSettings(false); 
+    }
+    let speedDialSettingsOn = () => {
+        setInbox(false);
+        setFavorites(false); 
+        setSettings(true); 
+    }
+
+
     let nightModeToggle = () => {
         document.body.removeAttribute('data-theme')
         document.body.setAttribute('data-theme', 'dark')
@@ -98,11 +115,14 @@ const DrawerModal = () => {
         auth.signOut(); 
     }
 
+
   return (
       <div className='h-screen w-full overflow-hidden'>
         <div className="drawer">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="modalWrapper drawer-content flex flex-col-reverse justify-end end">
+            <SpeedDialModal speedDialInboxOn={speedDialInboxOn} speedDialFavoritesOn={speedDialFavoritesOn} speedDialSettingsOn={speedDialSettingsOn} />
+
                 <SearchModal/>
                 {inbox ? <Inbox/> : null}
                 {favorites ? <Favorites/> : null}
