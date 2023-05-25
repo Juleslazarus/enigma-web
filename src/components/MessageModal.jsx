@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import { auth, db } from './Firebase'
 import { onAuthStateChanged } from 'firebase/auth'
 import { child, get, ref, set } from 'firebase/database'
+import SentMessageToast from './SentMessageToast'
 
 const MessageModal = ({closeMessageModal, MessageModal, searchTarget}) => {
     let [msgInput, setMsgInput] = useState(''); 
+    let [sentMsgToast, setSentMsgToast] = useState(false); 
 
     let sendMsg = () => {
 
@@ -20,17 +22,25 @@ const MessageModal = ({closeMessageModal, MessageModal, searchTarget}) => {
                         .then(send_target => {
                             let send_targetUid = send_target.val().uid; 
                             /* append the message to the recipients db  */
-                            set(ref(db, `users/${send_targetUid}/contacts/${userName}/messages/${msgInput}`), {
-                                msgText: msgInput, 
+                            set(ref(db, `users/${send_targetUid}/chat_ids/${userName}/`), {
+                                firstMsg: msgInput, 
+                                recipient: searchTarget,
                                 sentBy: userName, 
-                                contactName: userName
+                                created: Date()
                             }), 
                             /* set the message to the senders db */
-                            set(ref(db, `users/${uid}/contacts/${searchTarget}/messages/${msgInput}`), {
-                                msgText: msgInput, 
+                            set(ref(db, `users/${uid}/chats/${searchTarget}/`), {
+                                firstMsg: msgInput, 
+                                recipient: searchTarget, 
                                 sentBy: userName,
-                                contactName: searchTarget
+                                created: Date(),
                             })
+                                .then(() => {
+                                    setSentMsgToast(true); 
+                                    setTimeout(() => {
+                                        setSentMsgToast(false); 
+                                    }, 1500)
+                                })
                         })
                 })
         }) 
@@ -59,6 +69,7 @@ const MessageModal = ({closeMessageModal, MessageModal, searchTarget}) => {
 
             </div>
             </div>
+            {sentMsgToast ? <SentMessageToast searchTarget={searchTarget}/> : null}
     </>
   )
 }

@@ -7,6 +7,7 @@ import { FaBars, FaInbox, FaHeart, FaCog } from 'react-icons/fa';
 import SearchModal from './SearchModal';
 import { auth, db } from './Firebase';
 import { signOut } from 'firebase/auth';
+import SpeedDialModal from './SpeedDialModal';
 
 const DrawerModal = () => {
     let [inbox, setInbox] = useState(true); 
@@ -98,7 +99,7 @@ const DrawerModal = () => {
     }
 
   return (
-    <div className='h-screen w-full overflow-hidden'>
+      <div className='h-screen w-full overflow-hidden'>
         <div className="drawer">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="modalWrapper drawer-content flex flex-col-reverse justify-end end">
@@ -137,6 +138,7 @@ const DrawerModal = () => {
                 </ul>
             </div>
     </div>
+
     </div>
   )
 }

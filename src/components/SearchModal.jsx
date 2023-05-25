@@ -38,6 +38,14 @@ const SearchModal = () => {
                             if (searchText === resultText) {
                                 searchResultsCont.innerHTML = ''; 
                                 searchResultsCont.appendChild(resultsText); 
+                                resultsText.addEventListener('click', (e) => {
+                                    let searchDivLS = localStorage.setItem('searchTarget', `${e.target.innerHTML}`)
+                                    let displaySearchLS = localStorage.getItem('searchTarget'); 
+                                    console.log(displaySearchLS + "is the local storage thing"); 
+                                    
+                                    setSearchTarget(`${displaySearchLS}`)
+                                    setMessageModal(true); 
+                                })
                             }
                         } else {
                             resultDiv.appendChild(resultsText); 

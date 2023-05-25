@@ -2,6 +2,7 @@ import React from 'react'
 import SearchModal from './SearchModal'
 import { auth, db } from './Firebase'
 import { child, get, onValue, query, ref } from 'firebase/database'
+import SpeedDialModal from './SpeedDialModal'
 
 const Inbox = () => {
 //   let greetUser = () => {
@@ -27,25 +28,14 @@ const Inbox = () => {
   let retrieveMessages = () => {
     auth.onAuthStateChanged(cred => {
       let uid = cred.uid; 
-      let dbRef = query(ref(db, `users/${uid}/contacts/`)); 
-      // onValue(dbRef, contactNode => {
-
-      // })
-    onValue(dbRef, contacts => {
-      let contactsCont = document.querySelector('.contactsCont'); 
-      let contactDiv = document.createElement('div'); 
-      // contactsCont.innerHTML = ''; 
-      contacts.forEach(contact => {
-            let message = document.createElement('p'); 
-            contactDiv.classList.add('w-full', 'h-[4rem]', 'bg-slate-50', 'flex', 'flex-col', 'justify-center', 'gap-2', 'whitespace-nowrap', 'p-2', 'text-black')
-            message.classList.add('text-slate-600', 'text-ellipsis', 'overflow-hidden', 'pointer-events-none'); 
-            contactDiv.textContent = contact.val().contactName
-            message.textContent = contact.val().msgText; 
-            contactsCont.appendChild(contactDiv); 
-            contactDiv.appendChild(message); 
-            console.log(contact.val().msgText)
+      let dbRef = ref(db); 
+      get(child(dbRef, `users/${uid}/chats/`))
+      .then(chats => {
+        console.log(chats.val())
+        chats.forEach(chat => {
+          console.log(chat.val().firstMsg)
+        })
       })
-    })
     })
   }
 
@@ -60,6 +50,8 @@ const Inbox = () => {
           </div>
         </div>
       </div>
+      <SpeedDialModal/>
+
     </div>
   )
 }
