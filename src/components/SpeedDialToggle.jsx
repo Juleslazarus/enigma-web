@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 
 const SpeedDialToggle = ({handleSpeedDialState, speedDial}) => {
   return (
-      <div>
+      <div className='overflow-hidden'>
         {speedDial? <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{type: 'tween', duration: .3}} className='flex flex-col justify-center items-start gap-6 p-4'>
             <motion.i initial={{y: 10, opacity: 0}} animate={{y: 0, opacity: 1}} transition={{type: 'tween', duration: .3, delay: .3}} className='text-1xl'><FaRegEdit/></motion.i>
             <motion.i initial={{y: 10, opacity: 0}} animate={{y: 0, opacity: 1}} transition={{type: 'tween', duration: .3, delay: .2}} className='text-1xl'><FaStar/></motion.i>

@@ -14,7 +14,7 @@ const SpeedDialModal = () => {
       setSpeedDial(speedDial => !speedDial)
     }
   return (
-    <div className='fixed bottom-4 right-4'>
+    <div className='fixed bottom-4 right-4 overflow-hidden'>
       <SpeedDialToggle handleSpeedDialState={handleSpeedDialState} speedDial={speedDial}/>
     </div>
   )
