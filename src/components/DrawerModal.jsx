@@ -126,7 +126,7 @@ const DrawerModal = () => {
             <div className="modalWrapper drawer-content flex flex-col-reverse justify-end end">
             <SpeedDialModal speedDialInboxOn={speedDialInboxOn} speedDialFavoritesOn={speedDialFavoritesOn} speedDialSettingsOn={speedDialSettingsOn} />
 
-                <SearchModal/>
+                {/* <SearchModal/> */}
                 {inbox ? <Inbox/> : null}
                 {favorites ? <Favorites/> : null}
                 {settings ? <Settings/> : null}

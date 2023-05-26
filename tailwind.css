@@ -1774,6 +1774,26 @@ html {
   right: 0.25rem;
 }
 
+.right-\[5\%\] {
+  right: 5%;
+}
+
+.right-\[6\%\] {
+  right: 6%;
+}
+
+.right-6 {
+  right: 1.5rem;
+}
+
+.top-1 {
+  top: 0.25rem;
+}
+
+.right-8 {
+  right: 2rem;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -1794,8 +1814,16 @@ html {
   z-index: 50;
 }
 
+.float-right {
+  float: right;
+}
+
 .m-2 {
   margin: 0.5rem;
+}
+
+.m-1 {
+  margin: 0.25rem;
 }
 
 .ml-auto {
@@ -1812,6 +1840,14 @@ html {
 
 .mb-4 {
   margin-bottom: 1rem;
+}
+
+.mr-1 {
+  margin-right: 0.25rem;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
 }
 
 .flex {
@@ -1908,6 +1944,10 @@ html {
 
 .w-full {
   width: 100%;
+}
+
+.w-\[50\%\] {
+  width: 50%;
 }
 
 .max-w-xs {
@@ -2076,6 +2116,11 @@ html {
   background-color: rgb(10,10,10,0.2);
 }
 
+.bg-blue-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(96 165 250 / var(--tw-bg-opacity));
+}
+
 .fill-current {
   fill: currentColor;
 }
@@ -2103,6 +2148,10 @@ html {
 
 .text-center {
   text-align: center;
+}
+
+.text-end {
+  text-align: end;
 }
 
 .text-2xl {

@@ -1,6 +1,6 @@
 import { child, get, ref } from 'firebase/database';
 import React, { useState } from 'react'
-import { FaSearch } from 'react-icons/fa'
+import { FaInbox, FaRegEdit, FaSearch } from 'react-icons/fa'
 import { db } from './Firebase';
 // import RegisterModal from './RegisterModal';
 import MessageModal from './MessageModal';
@@ -89,7 +89,7 @@ const SearchModal = () => {
     }
   return (
     <div>
-        <label htmlFor="searchModal" className="btn btn-ghost absolute top-0 right-0"><FaSearch/></label>
+        <label htmlFor="searchModal" className=""><FaRegEdit/></label>
 
         <input type="checkbox" id="searchModal" className="modal-toggle" />
         <div className="modal">
