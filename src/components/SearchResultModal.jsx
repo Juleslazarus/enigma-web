@@ -12,12 +12,10 @@ const SearchResultModal = ({closeSearchResultModal, searchTarget}) => {
     
   return (
     <div >
-        {/* The button to open modal */}
         <label htmlFor="message-modal" className="btn btn-ghost">
-            <p className='w-full h-full'>Send Message</p>
+            <p className='w-full h-full'>Add</p>
         </label>
 
-        {/* Put this part before </body> tag */}
         <input type="checkbox" id="message-modal" className="modal-toggle" />
         <div className="modal">
         <div className="modal-box relative">

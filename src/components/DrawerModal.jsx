@@ -8,6 +8,7 @@ import SearchModal from './SearchModal';
 import { auth, db } from './Firebase';
 import { signOut } from 'firebase/auth';
 import SpeedDialModal from './SpeedDialModal';
+import RightDrawer from './RightDrawer';
 
 const DrawerModal = () => {
     let [inbox, setInbox] = useState(true); 
@@ -121,30 +122,28 @@ const DrawerModal = () => {
 
   return (
       <div className='h-screen w-full overflow-hidden'>
-        <div className="drawer">
+        <div className="drawer drawer-mobile">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="modalWrapper drawer-content flex flex-col-reverse justify-end end">
             <SpeedDialModal speedDialInboxOn={speedDialInboxOn} speedDialFavoritesOn={speedDialFavoritesOn} speedDialSettingsOn={speedDialSettingsOn} />
-
                 {/* <SearchModal/> */}
                 {inbox ? <Inbox/> : null}
                 {favorites ? <Favorites/> : null}
                 {settings ? <Settings/> : null}
                 {/* different pages */}
-                <label className='header drawer-button flex items-center h-[5%] bg-slate-100'>
+                <label className='header drawer-button flex items-center h-[5%]'>
                     <label htmlFor='my-drawer' className='p-2'>
-                        <i htmlFor='my-drawer' className=" text-1xl m-2 cursor-pointer"><FaBars/></i>
+                        <i htmlFor='my-drawer' className=" text-1xl m-2 cursor-pointer lg:hidden"><FaBars/></i>
                     </label>
-                    <h1 className='mr-[auto] ml-auto'>Enigma</h1>
                 </label>
             </div> 
             <div className="drawer-side">
                 <label id='closeDrawer' htmlFor="my-drawer" className="drawer-overlay"></label>
-                <ul className="menu p-4 w-80 bg-base-100 text-base-content flex flex-col gap-4 ">
+                <ul className="menu pt-4 pb-4 pr-1 pl-1 w-80 text-base-content flex flex-col gap-4 bg-base-300 ">
                     <li className='inboxBtn bg-slate-100 rounded-md'><a className='text-black' onClick={handleInboxOn}><i className=""><FaInbox/></i> Inbox</a></li>
                     <li className='favBtn bg-slate-100 rounded-md'><a className='text-black' onClick={handleFavoritesOn}><i className=""><FaHeart/></i> Favorites</a></li>
                     <li className='settingsBtn bg-slate-100 rounded-md'><a className='text-black' onClick={handleSettingsOn}><i className=""><FaCog/></i> Settings</a></li>
-                    <div className='bottomBar bg-slate-100 mt-[auto] rounded-lg flex items-center '>
+                    <div className='bottomBar  mt-[auto] rounded-lg flex items-center bg-base-300 '>
                         <li className='mr-[auto] btn btn-primary btn-outline btn-wide' onClick={signUserOut}><a>Sign Out</a></li>
                         <label className="swap swap-rotate p-2" >
   

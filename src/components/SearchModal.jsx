@@ -1,6 +1,6 @@
 import { child, get, ref } from 'firebase/database';
 import React, { useState } from 'react'
-import { FaInbox, FaRegEdit, FaSearch } from 'react-icons/fa'
+import { FaInbox, FaPlus, FaRegEdit, FaSearch } from 'react-icons/fa'
 import { db } from './Firebase';
 // import RegisterModal from './RegisterModal';
 import MessageModal from './MessageModal';
@@ -19,7 +19,7 @@ const SearchModal = () => {
             .then(users => {
                 let searchResultsCont = document.querySelector('.searchResultsCont'); 
                 let exactMatch = document.querySelector('.exactMatch')
-                console.log(exactMatch)
+                // console.log(exactMatch)
                 searchResultsCont.innerHTML = ''; 
                 users.forEach(user => {
                     let search = searchInput; 
@@ -41,22 +41,33 @@ const SearchModal = () => {
                                 resultsText.addEventListener('click', (e) => {
                                     let searchDivLS = localStorage.setItem('searchTarget', `${e.target.innerHTML}`)
                                     let displaySearchLS = localStorage.getItem('searchTarget'); 
-                                    console.log(displaySearchLS + "is the local storage thing"); 
+                                    // console.log(displaySearchLS + "is the local storage thing"); 
                                     
                                     setSearchTarget(`${displaySearchLS}`)
-                                    setMessageModal(true); 
+
+                                    // let userBadges = document.querySelector('.userBadges')
+                                    // let userBadgeEl = document.createElement('span'); 
+                                    // userBadgeEl.textContent = `${searchTarget}`
+                                    // userBadges.appendChild(userBadgeEl)
+                                    
                                 })
                             }
                         } else {
                             resultDiv.appendChild(resultsText); 
                             searchResultsCont.appendChild(resultDiv); 
-                            resultDiv.addEventListener('click', (e) => {
+                            console.log(resultDiv)
+                            resultsText.addEventListener('click', (e) => {
+                                let clearSearchTargetLS = localStorage.removeItem('searchTarget'); 
+                                setSearchTarget()
                                 let searchDivLS = localStorage.setItem('searchTarget', `${e.target.innerHTML}`)
                                 let displaySearchLS = localStorage.getItem('searchTarget'); 
                                 console.log(displaySearchLS + "is the local storage thing"); 
                                 
                                 setSearchTarget(`${displaySearchLS}`)
-                                setMessageModal(true); 
+                                let userBadges = document.querySelector('.userBadges')
+                                let userBadgeEl = document.createElement('span'); 
+                                userBadgeEl.textContent = `${searchTarget}`
+                                userBadges.appendChild(userBadgeEl)
                             })
                             
                         }
@@ -78,7 +89,7 @@ const SearchModal = () => {
 
     let handleEnterKey = (e) => {
         if(e.keyCode === 13) {
-            let addBtn = document.getElementById('searchBtn').click(); 
+            let searchBtn = document.getElementById('searchBtn').click(); 
         }
     }
     let emptyInputs = () => {
@@ -87,6 +98,28 @@ const SearchModal = () => {
         setSearchInput(''); 
         searchResultsCont.innerHTML = ''; 
     }
+
+
+    //? this is a good way to deal with setting an array into Local Storage and getting each back labeled and reinserted and retrieved from LS 
+
+    let arrayLS = () => {
+        let Arr = [' user1 ', ' user2 ', ' user3 '];
+        let StoreArr = localStorage.setItem('array', `${Arr}`)
+        // console.log('function ran! array appended? ')
+        let getStoredArr = localStorage.getItem('array'); 
+        let storedArrSplit = getStoredArr.split(' ,')
+        let storedArrSplitLength = storedArrSplit.length; 
+        let i =+ 0; 
+        while(i < storedArrSplit.length) {
+            // console.log( storedArrSplit[i] )
+            let individualUserLS = localStorage.setItem(`user${i}`, `${storedArrSplit[i]}`)
+            let getIndividualUserLS = localStorage.getItem(`user${i}`)
+            // console.log(getIndividualUserLS + " is the local storage user")
+            i++
+        }
+    }
+
+    arrayLS(); 
   return (
     <div>
         <label htmlFor="searchModal" className=""><FaRegEdit/></label>
@@ -95,18 +128,32 @@ const SearchModal = () => {
         <div className="modal">
         <div className="modal-box relative flex flex-col gap-4">
             <label htmlFor="searchModal" className="btn btn-ghost btn-square absolute right-2 top-2" onClick={() => { emptyInputs }}>✕</label>
-            <h3 className="text-lg text-center font-bold">Search For New Users</h3>
+            <h3 className="text-lg text-center font-bold">Create Chat</h3>
 
+            <div className='setChatIdCont'>
+                <div className="form-control">
+                    <div className="input-group">
+                        <input type="text" placeholder="Set Chat Room Key" className="chatIDInput input input-bordered w-full" />
+                        <button id='createChat' className="btn btn-ghost" >
+                            <FaPlus/>
+                        </button>
+                    </div>
+                </div>
+            </div>
             <div className='searchInputCont'>
                 <div className="form-control">
                     <div className="input-group">
-                        <input type="text" placeholder="Search…" className="searchInput input input-bordered w-full" value={searchInput} onKeyDown={handleEnterKey} onInput={(e) => { setSearchInput(e.target.value); userSearch(); } } />
+                        <input type="text" placeholder="Search…" className="searchInput input input-bordered w-full" onKeyDown={handleEnterKey} value={searchInput} onInput={(e) => { setSearchInput(e.target.value); userSearch(); }}/>
                         <button id='searchBtn' className="btn btn-ghost" onClick={userSearch}>
                             <FaSearch/>
                         </button>
                     </div>
                 </div>
             </div>
+                <div className='userBadges'> 
+                    
+
+                </div>
             <div className='searchResultsCont h-[50vh] bg-ghost z-10 '>
                 <div className='exactMatch h-10 w-[95%] text-left bg-slate-50 '>
 
