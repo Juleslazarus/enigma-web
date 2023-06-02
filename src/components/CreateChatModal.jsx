@@ -1,10 +1,10 @@
 import React from 'react'
 import { FaRegEdit } from 'react-icons/fa'
-import SearchModal from './SearchModal'
+import SearchModal from './CreateChat'
 
 const CreateChatModal = () => {
   return (
-    <div className=' '>
+    <div className=''>
         <label htmlFor="createChatModal" className="float-right"><i className='text-end'><FaRegEdit/></i></label>
 
             <input type="checkbox" id="createChatModal" className="modal-toggle" />

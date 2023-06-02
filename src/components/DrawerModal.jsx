@@ -4,11 +4,10 @@ import Inbox from './Inbox'
 import Favorites from './Favorites'
 import Settings from './Settings'
 import { FaBars, FaInbox, FaHeart, FaCog } from 'react-icons/fa';
-import SearchModal from './SearchModal';
+import SearchModal from './CreateChat';
 import { auth, db } from './Firebase';
 import { signOut } from 'firebase/auth';
 import SpeedDialModal from './SpeedDialModal';
-import RightDrawer from './RightDrawer';
 
 const DrawerModal = () => {
     let [inbox, setInbox] = useState(true); 
