@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { auth, db } from './Firebase'
 import { onAuthStateChanged } from 'firebase/auth'
 import { child, get, ref, set } from 'firebase/database'
-import SentMessageToast from './SentMessageToast'
+import ToastTop from './ToastTop'
 
 const MessageModal = ({closeMessageModal, MessageModal, searchTarget}) => {
     let [msgInput, setMsgInput] = useState(''); 

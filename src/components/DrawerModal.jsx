@@ -3,15 +3,17 @@ import React, { useState } from 'react'
 import Inbox from './Inbox'
 import Favorites from './Favorites'
 import Settings from './Settings'
-import { FaBars, FaInbox, FaHeart, FaCog } from 'react-icons/fa';
+import { FaBars, FaInbox, FaHeart, FaCog, FaListUl } from 'react-icons/fa';
 import SearchModal from './CreateChat';
 import { auth, db } from './Firebase';
 import { signOut } from 'firebase/auth';
 import SpeedDialModal from './SpeedDialModal';
+import ChatList from './ChatList';
 
 const DrawerModal = () => {
     let [inbox, setInbox] = useState(true); 
     let [favorites, setFavorites] = useState(false); 
+    let [chatList, setChatList] = useState(false); 
     let [settings, setSettings] = useState(false); 
     let [darkMode, setDarkMode] = useState(false); 
 
@@ -22,18 +24,30 @@ const DrawerModal = () => {
     let handleInboxOn = () => {
         setInbox(true)
         setFavorites(false); 
+        setChatList(false); 
         setSettings(false); 
         let closeDrawer = document.getElementById('closeDrawer').click()
     }
     let handleFavoritesOn = () => {
         setInbox(false); 
         setFavorites(true); 
+        setChatList(false); 
         setSettings(false); 
         let closeDrawer = document.getElementById('closeDrawer').click()
     }
+/*  */
+    let handleChatListOn = () => {
+        setInbox(false); 
+        setFavorites(false); 
+        setChatList(true); 
+        setSettings(false); 
+        let closeDrawer = document.getElementById('closeDrawer').click(); 
+    }
+/*  */
     let handleSettingsOn = () => {
         setInbox(false);
         setFavorites(false); 
+        setChatList(false); 
         setSettings(true); 
         let closeDrawer = document.getElementById('closeDrawer').click()
     }
@@ -41,18 +55,28 @@ const DrawerModal = () => {
     let speedDialInboxOn = () => {
         setInbox(true)
         setFavorites(false); 
+        setChatList(false); 
         setSettings(false); 
         let closeSpeedDial = document.getElementById('closeSpeedDial').click(); 
     }
     let speedDialFavoritesOn = () => {
         setInbox(false); 
         setFavorites(true); 
+        setChatList(false); 
+        setSettings(false); 
+        let closeSpeedDial = document.getElementById('closeSpeedDial').click(); 
+    }
+    let speedDialChatListOn = () => {
+        setInbox(false); 
+        setFavorites(false); 
+        setChatList(true); 
         setSettings(false); 
         let closeSpeedDial = document.getElementById('closeSpeedDial').click(); 
     }
     let speedDialSettingsOn = () => {
         setInbox(false);
         setFavorites(false); 
+        setChatList(false); 
         setSettings(true); 
         let closeSpeedDial = document.getElementById('closeSpeedDial').click(); 
     }
@@ -124,10 +148,11 @@ const DrawerModal = () => {
         <div className="drawer drawer-mobile">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="modalWrapper drawer-content flex flex-col-reverse justify-end end">
-            <SpeedDialModal speedDialInboxOn={speedDialInboxOn} speedDialFavoritesOn={speedDialFavoritesOn} speedDialSettingsOn={speedDialSettingsOn} />
+            <SpeedDialModal speedDialInboxOn={speedDialInboxOn} speedDialFavoritesOn={speedDialFavoritesOn} speedDialSettingsOn={speedDialSettingsOn} speedDialChatListOn={speedDialChatListOn} />
                 {/* <SearchModal/> */}
                 {inbox ? <Inbox/> : null}
                 {favorites ? <Favorites/> : null}
+                {chatList ? <ChatList/> : null}
                 {settings ? <Settings/> : null}
                 {/* different pages */}
                 <label className='header drawer-button flex items-center h-[5%]'>
@@ -139,9 +164,10 @@ const DrawerModal = () => {
             <div className="drawer-side">
                 <label id='closeDrawer' htmlFor="my-drawer" className="drawer-overlay"></label>
                 <ul className="menu pt-4 pb-4 pr-1 pl-1 w-80 text-base-content flex flex-col gap-4 bg-base-300 ">
-                    <li className='inboxBtn bg-slate-100 rounded-md'><a className='text-black' onClick={handleInboxOn}><i className=""><FaInbox/></i> Inbox</a></li>
-                    <li className='favBtn bg-slate-100 rounded-md'><a className='text-black' onClick={handleFavoritesOn}><i className=""><FaHeart/></i> Favorites</a></li>
-                    <li className='settingsBtn bg-slate-100 rounded-md'><a className='text-black' onClick={handleSettingsOn}><i className=""><FaCog/></i> Settings</a></li>
+                    <li className='inboxBtn bg-base-100 rounded-md'><a className='text-black' onClick={handleInboxOn}><i className=""><FaInbox/></i> Inbox</a></li>
+                    <li className='favBtn bg-base-100 rounded-md'><a className='text-black' onClick={handleFavoritesOn}><i className=""><FaHeart/></i> Favorites</a></li>
+                    <li className='favBtn bg-base-100 rounded-md'><a className='text-black' onClick={handleChatListOn}><i className=""><FaListUl/></i> Find Chat Rooms</a></li>
+                    <li className='settingsBtn bg-base-100 rounded-md'><a className='text-black' onClick={handleSettingsOn}><i className=""><FaCog/></i> Settings</a></li>
                     <div className='bottomBar  mt-[auto] rounded-lg flex items-center bg-base-300 '>
                         <li className='mr-[auto] btn btn-primary btn-outline btn-wide' onClick={signUserOut}><a>Sign Out</a></li>
                         <label className="swap swap-rotate p-2" >

@@ -1,19 +1,19 @@
-import { child, get, ref } from 'firebase/database';
+import { child, get, ref, set, update, remove } from 'firebase/database';
 import React, { useState } from 'react'
 import { FaInbox, FaPlus, FaRegEdit, FaSearch } from 'react-icons/fa'
-import { db } from './Firebase';
-// import RegisterModal from './RegisterModal';
-import MessageModal from './MessageModal';
-
+import { db, auth } from './Firebase';
+import TopToastError from './TopToastError';
 
 const CreateChat = () => {
     let [searchInput, setSearchInput] = useState(''); 
     let [searchTarget, setSearchTarget] = useState(''); 
     let [messageModal, setMessageModal] = useState(false); 
+    let [chatErrorToast, setChatErrorToast] = useState(false); 
 
     let [chatNameInput, setChatNameInput] = useState(''); 
-    let [chatKeyInput, setChatKeyInput] = useState(false); 
+    let [chatKeyInput, setChatKeyInput] = useState(''); 
     let [privacyStatus, setPrivacyStatus] = useState('')
+    let [errText, setErrText] = useState(''); 
 
 
     let [chatArr, setChatArr] = useState([])
@@ -109,8 +109,17 @@ const CreateChat = () => {
         }
     }
     let emptyInputs = () => {
-        let chatIDInput = document.querySelector('.chatIDInput')
-        chatIDInput.value = ''; 
+        setChatNameInput(''); 
+        setChatKeyInput(''); 
+        let chatNInput = document.querySelector('.chatNInput')
+        let chatKInput = document.querySelector('.chatKInput')
+        chatNInput.value = ''; 
+        if(privacyStatus == true) {
+            chatKeyInput = ''; 
+        } else {
+            return false; 
+        }
+        
     }
 
 
@@ -132,12 +141,63 @@ const CreateChat = () => {
     //         i++
     //     }
     // }
-
+    
     // arrayLS(); 
-
+    
     let handleChatCreate = () => {
-        let chatName = `${chatKeyInput}`
-        console.log(chatName); 
+        console.log(privacyStatus); 
+        if(chatNameInput === '' || chatNameInput === '' && privacyStatus === true && chatKeyInput === '' || privacyStatus === true && chatKeyInput === '' ){
+            setErrText('You Must Fill In The Required Fields!')
+            setChatErrorToast(true); 
+            console.log(errText)
+            setTimeout(() => {
+                console.time()
+                setChatErrorToast(false); 
+                setErrText(''); 
+                console.log(errText)
+                console.timeEnd()
+            }, 2000)
+        } else {
+            if(privacyStatus === 'Private') {
+                return true; 
+            } else {
+                let chatName = `${chatNameInput}`
+                let refChatInDB = ref(db)
+                auth.onAuthStateChanged(cred => {
+                    let uid = cred.uid; 
+                    get(child(refChatInDB, `/chatRooms/${chatName}`))
+                        .then(chat => {
+                            if (chat.exists()) { 
+                                setErrText('A Chat Room With That Name Already Exists!')
+                                setChatErrorToast(true); 
+                                console.log(errText)
+                                setTimeout(() => {
+                                    console.time()
+                                    setChatErrorToast(false); 
+                                    setErrText(''); 
+                                    console.log(errText)
+                                    console.timeEnd()
+                                }, 2000)
+                            } else {
+                                let userRef = ref(db)
+                                get(child(userRef, `users/${uid}`))
+                                    .then(user_info => {
+                                        let userName = user_info.val().userName
+                                        set(ref(db, `users/${uid}/local_chats/${chatNameInput}`), {
+                                            chatName: chatNameInput, 
+                                            createdBy: userName, 
+                                            privacyStatus: `${privacyStatus}`, 
+                                            key: `${privacyStatus}`, 
+                                            users: userName, /* this will set the first user inside the db because they're creating it. when someone joins itll pull this db entry, create an array and then append the new user to the array and update the db entry with the new list */
+    
+                                        })
+    
+                                    })
+                            }
+                        })
+                })
+            }
+        }
     }
   return (
     <div>
@@ -146,14 +206,15 @@ const CreateChat = () => {
         <input type="checkbox" id="searchModal" className="modal-toggle" />
         <div className="modal">
         <div className="modal-box relative flex flex-col gap-4">
-            <label htmlFor="searchModal" className="btn btn-ghost btn-square absolute right-2 top-2" onClick={() => { emptyInputs }}>✕</label>
+            <label htmlFor='searchModal' className="btn btn-ghost btn-square absolute right-2 top-2" onClick={emptyInputs}>✕</label>
             <h3 className="text-lg text-center font-bold">Create Chat</h3>
+
 
 
             <div className='setChatNameCont'>
                 <div className="form-control">
                     <div className="input-group">
-                        <input type="text" placeholder="Set Chat Room Name" className="chatIDInput input input-bordered w-full bg-base-300" value={chatNameInput} onInput={(e) => { setChatNameInput(e.target.value) }}  />
+                        <input type="text" placeholder="Set Chat Room Name" className="chatNInput input input-bordered w-full bg-base-300" onInput={(e) => { setChatNameInput(e.target.value) }}  />
                         <button id='createChat' className="btn btn-ghost" >
                             <FaPlus/>
                         </button>
@@ -164,7 +225,7 @@ const CreateChat = () => {
             {   privacyStatus === 'Private' ?      <div className='setChatIdCont'>
                         <div className="form-control">
                             <div className="input-group">
-                                <input type="text" placeholder="Set Chat Room Key" className="chatIDInput input input-bordered w-full bg-base-300" value={chatKeyInput} onInput={(e) => { setChatKeyInput(e.target.value) }}  />
+                                <input type="text" placeholder="Set Chat Room Key" className="chatKInput input input-bordered w-full bg-base-300" onInput={(e) => { setChatKeyInput(e.target.value) }}  />
                                 <button id='createChat' className="btn btn-ghost" >
                                     <FaPlus/>
                                 </button>
@@ -188,19 +249,20 @@ const CreateChat = () => {
 
                 </div>
                  */}
-                <div className='chatRoomOptionsCont flex flex-col items-start'>
+                <div className='chatRoomOptionsCont flex flex-col items-start '>
                     <select className="select select-primary w-full max-w-xs" onChange={(e) => { setPrivacyStatus(`${e.target.value}`)}}>
                         <option disabled selected>Privacy Status</option>
                         <option>Private</option>
                         <option>Public</option>
                     </select>
                 </div>
-            <div className='searchResultsCont h-[50vh] bg-ghost z-10 '>
-                <div className='exactMatch h-10 w-[95%] text-left bg-slate-50 '>
+            
+            <div className='createBtnCont w-full justify-center flex mt-auto'>
+                <button className='btn btn-primary btn-wide' onClick={handleChatCreate}>Create Chat</button>
+            </div>
+            <div className='toastCont mt-10 flex justify-center items-center text-center'>
+                { chatErrorToast ? <TopToastError errText={errText} />: null }
 
-                </div>
-                {/* user search results will go here! */}
-                { messageModal ? <MessageModal closeMessageModal={closeMessageModal} searchTarget={searchTarget}/> : null}
             </div>
         </div>
         </div>

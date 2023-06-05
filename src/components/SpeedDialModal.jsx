@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FaInbox, FaPlus } from 'react-icons/fa'
+import { FaInbox, FaList, FaListUl, FaPlus } from 'react-icons/fa'
 import { FaCommentMedical } from 'react-icons/fa'
 import { FaCog } from 'react-icons/fa'
 import { FaRegEdit } from 'react-icons/fa'
@@ -9,7 +9,7 @@ import { motion } from 'framer-motion'
 import CreateChatModal from './CreateChatModal'
 import CreateChat from './CreateChat'
 
-const SpeedDialModal = ({speedDialInboxOn, speedDialFavoritesOn, speedDialSettingsOn}) => {
+const SpeedDialModal = ({speedDialInboxOn, speedDialFavoritesOn, speedDialSettingsOn, speedDialChatListOn}) => {
     let [openBtn, setOpenBtn] = useState(true); 
     let [speedDial, setSpeedDial] = useState(false); 
 
@@ -22,15 +22,17 @@ const SpeedDialModal = ({speedDialInboxOn, speedDialFavoritesOn, speedDialSettin
       {/* <SpeedDialToggle handleSpeedDialState={handleSpeedDialState} speedDial={speedDial}/> */}
       <div className='overflow-hidden flex flex-col justify-center items-center'>
         {speedDial? <motion.div initial={{opacity: 0}} animate={{opacity: 1}} transition={{type: 'tween', duration: .3}} className='flex flex-col justify-center items-center gap-6 p-4'>
-            <motion.i initial={{y: 10, opacity: 0}} animate={{y: 0, opacity: 1}} transition={{type: 'tween', duration: .08, delay: .4}} className='text-2xl flex justify-center'><CreateChat/></motion.i>
-            <motion.i initial={{y: 10, opacity: 0}} animate={{y: 0, opacity: 1}} transition={{type: 'tween', duration: .08, delay: .3}} onClick={speedDialInboxOn} className='text-2xl hover:cursor-pointer'><FaInbox/></motion.i>
-            <motion.i initial={{y: 10, opacity: 0}} animate={{y: 0, opacity: 1}} transition={{type: 'tween', duration: .08, delay: .2}} onClick={speedDialFavoritesOn} className='text-2xl'><FaStar/></motion.i>
-            <motion.i initial={{y: 10, opacity: 0}} animate={{y: 0, opacity: 1}} transition={{type: 'tween', duration: .08, delay: .1}} onClick={speedDialSettingsOn} className='text-2xl'><FaCog/></motion.i>
+            <motion.i initial={{y: 10, opacity: 0}} animate={{y: 0, opacity: 1}} transition={{type: 'tween', type: 'spring', stiffness: 100, duration: .1, delay: .5}} className='text-2xl flex justify-center'><CreateChat/></motion.i>
+            <motion.i initial={{y: 10, opacity: 0}} animate={{y: 0, opacity: 1}} transition={{type: 'tween', type: 'spring', stiffness: 100, duration: .1, delay: .4}} onClick={speedDialInboxOn} className='text-2xl hover:cursor-pointer'><FaInbox/></motion.i>
+            <motion.i initial={{y: 10, opacity: 0}} animate={{y: 0, opacity: 1}} transition={{type: 'tween', type: 'spring', stiffness: 100, duration: .1, delay: .3}} onClick={speedDialFavoritesOn} className='text-2xl'><FaStar/></motion.i>
+            <motion.i initial={{y: 10, opacity: 0}} animate={{y: 0, opacity: 1}} transition={{type: 'tween', type: 'spring', stiffness: 100, duration: .1, delay: .2}} onClick={speedDialChatListOn} className='text-2xl hover:cursor-pointer'><FaListUl/></motion.i>
+            <motion.i initial={{y: 10, opacity: 0}} animate={{y: 0, opacity: 1}} transition={{type: 'tween', type: 'spring', stiffness: 100, duration: .1, delay: .1}} onClick={speedDialSettingsOn} className='text-2xl'><FaCog/></motion.i>
         </motion.div> : <motion.div initial={{opacity: 1}} animate={{opacity: 0}} transition={{type: 'tween', duration: .6}} className='flex flex-col justify-center items-center gap-6 p-4'>
-            <motion.i animate={{y: 10, opacity: 0}} initial={{y: 0, opacity: 1}} transition={{type: 'tween', duration: .08, delay: .4}} className='text-2xl'><FaRegEdit/></motion.i>
-            <motion.i animate={{y: 10, opacity: 0}} initial={{y: 0, opacity: 1}} transition={{type: 'tween', duration: .08, delay: .3}} className='text-2xl'><FaInbox/></motion.i>
-            <motion.i animate={{y: 10, opacity: 0}} initial={{y: 0, opacity: 1}} transition={{type: 'tween', duration: .08, delay: .2}} className='text-2xl'><FaStar/></motion.i>
-            <motion.i animate={{y: 10, opacity: 0}} initial={{y: 0, opacity: 1}} transition={{type: 'tween', duration: .08, delay: .1}} className='text-2xl'><FaCog/></motion.i>
+            <motion.i animate={{y: 10, opacity: 0}} initial={{y: 0, opacity: 1}} transition={{type: 'tween', type: 'spring', stiffness: 100, duration: .1, delay: .5}} className='text-2xl'><FaRegEdit/></motion.i>
+            <motion.i animate={{y: 10, opacity: 0}} initial={{y: 0, opacity: 1}} transition={{type: 'tween', type: 'spring', stiffness: 100, duration: .1, delay: .4}} className='text-2xl'><FaInbox/></motion.i>
+            <motion.i animate={{y: 10, opacity: 0}} initial={{y: 0, opacity: 1}} transition={{type: 'tween', type: 'spring', stiffness: 100, duration: .1, delay: .3}} className='text-2xl'><FaStar/></motion.i>
+            <motion.i animate={{y: 10, opacity: 0}} initial={{y: 0, opacity: 1}} transition={{type: 'tween', type: 'spring', stiffness: 100, duration: .1, delay: .2}} className='text-2xl hover:cursor-pointer'><FaListUl/></motion.i>
+            <motion.i animate={{y: 10, opacity: 0}} initial={{y: 0, opacity: 1}} transition={{type: 'tween', type: 'spring', stiffness: 100, duration: .1, delay: .1}} className='text-2xl'><FaCog/></motion.i>
         </motion.div>}
         <label className="btn btn-circle btn-primary swap swap-rotate hover:cursor-pointer">
         

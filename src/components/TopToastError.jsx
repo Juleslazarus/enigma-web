@@ -1,12 +1,12 @@
 import React from 'react'
 
-const SentMessageToast = ({searchTarget}) => {
+const TopToastError = (props) => {
   return (
     <div className='wrapper'>
         <div className="toast toast-start">
-            <div className="alert alert-success">
+            <div className="alert alert-error">
                 <div>
-                <span>Message sent to {searchTarget} successfully.</span>
+                <span className='text-sm text-center'>{props.errText}</span>
                 </div>
             </div>
         </div>
@@ -14,4 +14,4 @@ const SentMessageToast = ({searchTarget}) => {
   )
 }
 
-export default SentMessageToast
+export default TopToastError
