@@ -8,6 +8,7 @@ import { auth, db } from './Firebase';
 import { signOut } from 'firebase/auth';
 import ChatList from './ChatList';
 import QuickLinks from './QuickLinks';
+import InboxCarousel from './InboxCarousel';
 
 const DrawerModal = () => {
     let [inbox, setInbox] = useState(true); 
@@ -86,21 +87,7 @@ const DrawerModal = () => {
         let bottomBar = document.querySelector('.bottomBar'); 
         let header = document.querySelector('.header'); 
 
-        inboxBtn.classList.remove('bg-slate-100');
-        inboxBtn.classList.add('bg-gray-900'); 
-
-        favBtn.classList.remove('bg-slate-100'); 
-        favBtn.classList.add('bg-gray-900');
-
-        settingsBtn.classList.remove('bg-slate-100'); 
-        settingsBtn.classList.add('bg-gray-900'); 
-
-        bottomBar.classList.remove('bg-slate-100'); 
-        bottomBar.classList.add('bg-gray-900'); 
-
-        header.classList.remove('bg-slate-100'); 
-        header.classList.add('bg-gray-900'); 
-
+        
         setDarkMode(true); 
     }
 
@@ -143,9 +130,11 @@ const DrawerModal = () => {
         <div className="drawer drawer-mobile">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="modalWrapper drawer-content flex flex-col-reverse justify-end end">
-            <QuickLinks quickInboxOn={quickInboxOn} quickFavoritesOn={quickFavoritesOn} quickSettingsOn={quickSettingsOn} quickChatListOn={quickChatListOn} />
+            <div className='lg:hidden'>
+                <QuickLinks quickInboxOn={quickInboxOn} quickFavoritesOn={quickFavoritesOn} quickSettingsOn={quickSettingsOn} quickChatListOn={quickChatListOn} />
+            </div>
                 {/* <SearchModal/> */}
-                {inbox ? <Inbox/> : null}
+                {inbox ? <InboxCarousel/> : null}
                 {favorites ? <Favorites/> : null}
                 {chatList ? <ChatList/> : null}
                 {settings ? <Settings/> : null}

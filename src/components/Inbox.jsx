@@ -41,18 +41,16 @@ const Inbox = () => {
 
   retrieveMessages(); 
   return (
-    <div>
-      <div className='contactsCont flex flex-col items-center gap-2 p-2 overflow-hidden'>
+      <div className='contactsCont flex flex-col items-center gap-2 p-2 overflow-hidden w-full'>
         <div className='contact w-[100%] h-[4rem] bg-base-300 flex-col justify-center gap-2 whitespace-nowrap p-2 m-2'>
           <p className='userName h-[50%]'>Timothy  </p>
           <div>
             <p className='newest Msg text-ellipsis overflow-hidden'>whats up dawgy dog dawgydawgydawgydawgydawgy </p>
           </div>
         </div>
-      </div>
-      <SpeedDialModal/>
+      </div> 
 
-    </div>
+     
   )
 }
 

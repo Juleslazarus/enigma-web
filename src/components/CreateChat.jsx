@@ -201,7 +201,7 @@ const CreateChat = () => {
     }
   return (
     <div>
-        <label htmlFor="searchModal" className="hover:cursor-pointer flex justify-center    "><FaRegEdit/></label>
+        <label htmlFor="searchModal" className="hover:cursor-pointer flex justify-center  h-full w-full  "><FaRegEdit/></label>
 
         <input type="checkbox" id="searchModal" className="modal-toggle" />
         <div className="modal">
