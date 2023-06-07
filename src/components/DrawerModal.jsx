@@ -4,11 +4,10 @@ import Inbox from './Inbox'
 import Favorites from './Favorites'
 import Settings from './Settings'
 import { FaBars, FaInbox, FaHeart, FaCog, FaListUl } from 'react-icons/fa';
-import SearchModal from './CreateChat';
 import { auth, db } from './Firebase';
 import { signOut } from 'firebase/auth';
-import SpeedDialModal from './SpeedDialModal';
 import ChatList from './ChatList';
+import QuickLinks from './QuickLinks';
 
 const DrawerModal = () => {
     let [inbox, setInbox] = useState(true); 
@@ -148,7 +147,7 @@ const DrawerModal = () => {
         <div className="drawer drawer-mobile">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="modalWrapper drawer-content flex flex-col-reverse justify-end end">
-            <SpeedDialModal speedDialInboxOn={speedDialInboxOn} speedDialFavoritesOn={speedDialFavoritesOn} speedDialSettingsOn={speedDialSettingsOn} speedDialChatListOn={speedDialChatListOn} />
+            <QuickLinks speedDialInboxOn={speedDialInboxOn} speedDialFavoritesOn={speedDialFavoritesOn} speedDialSettingsOn={speedDialSettingsOn} speedDialChatListOn={speedDialChatListOn} />
                 {/* <SearchModal/> */}
                 {inbox ? <Inbox/> : null}
                 {favorites ? <Favorites/> : null}
