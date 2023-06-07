@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { FaInbox, FaPlus, FaRegEdit, FaSearch } from 'react-icons/fa'
 import { db, auth } from './Firebase';
 import TopToastError from './TopToastError';
-
+ 
 const CreateChat = () => {
     let [searchInput, setSearchInput] = useState(''); 
     let [searchTarget, setSearchTarget] = useState(''); 

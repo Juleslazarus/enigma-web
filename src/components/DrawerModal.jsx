@@ -159,7 +159,7 @@ const DrawerModal = () => {
                     <label htmlFor='my-drawer' className='p-2'>
                         <i htmlFor='my-drawer' className=" text-1xl m-2 cursor-pointer lg:hidden"><FaBars/></i>
                     </label>
-                </label>
+                </label> 
             </div> 
             <div className="drawer-side">
                 <label id='closeDrawer' htmlFor="my-drawer" className="drawer-overlay"></label>

@@ -2,7 +2,7 @@ import React from 'react'
 
 const TopToastError = (props) => {
   return (
-    <div className='wrapper'>
+    <div className='wrapper'> 
         <div className="toast toast-start">
             <div className="alert alert-error">
                 <div>

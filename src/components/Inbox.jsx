@@ -2,7 +2,7 @@ import React from 'react'
 import SearchModal from './CreateChat'
 import { auth, db } from './Firebase'
 import { child, get, onValue, query, ref } from 'firebase/database'
-import SpeedDialModal from './SpeedDialModal'
+import SpeedDialModal from './SpeedDialModal' 
 
 const Inbox = () => {
 //   let greetUser = () => {
@@ -20,7 +20,7 @@ const Inbox = () => {
 //                 modalWrapper.appendChild(alertElement); 
 //                 setTimeout(() => {
 //                     modalWrapper.removeChild(alertElement)
-//                 }, 1500)
+//                 }, 1500) 
 //             })
 //     })
 // }
