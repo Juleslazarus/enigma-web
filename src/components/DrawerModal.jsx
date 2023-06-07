@@ -51,33 +51,29 @@ const DrawerModal = () => {
         let closeDrawer = document.getElementById('closeDrawer').click()
     }
 
-    let speedDialInboxOn = () => {
+    let quickInboxOn = () => {
         setInbox(true)
         setFavorites(false); 
         setChatList(false); 
         setSettings(false); 
-        let closeSpeedDial = document.getElementById('closeSpeedDial').click(); 
     }
-    let speedDialFavoritesOn = () => {
+    let quickFavoritesOn = () => {
         setInbox(false); 
         setFavorites(true); 
         setChatList(false); 
         setSettings(false); 
-        let closeSpeedDial = document.getElementById('closeSpeedDial').click(); 
     }
-    let speedDialChatListOn = () => {
+    let quickChatListOn = () => {
         setInbox(false); 
         setFavorites(false); 
         setChatList(true); 
         setSettings(false); 
-        let closeSpeedDial = document.getElementById('closeSpeedDial').click(); 
     }
-    let speedDialSettingsOn = () => {
+    let quickSettingsOn = () => {
         setInbox(false);
         setFavorites(false); 
         setChatList(false); 
         setSettings(true); 
-        let closeSpeedDial = document.getElementById('closeSpeedDial').click(); 
     }
 
 
@@ -147,7 +143,7 @@ const DrawerModal = () => {
         <div className="drawer drawer-mobile">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="modalWrapper drawer-content flex flex-col-reverse justify-end end">
-            <QuickLinks speedDialInboxOn={speedDialInboxOn} speedDialFavoritesOn={speedDialFavoritesOn} speedDialSettingsOn={speedDialSettingsOn} speedDialChatListOn={speedDialChatListOn} />
+            <QuickLinks quickInboxOn={quickInboxOn} quickFavoritesOn={quickFavoritesOn} quickSettingsOn={quickSettingsOn} quickChatListOn={quickChatListOn} />
                 {/* <SearchModal/> */}
                 {inbox ? <Inbox/> : null}
                 {favorites ? <Favorites/> : null}
