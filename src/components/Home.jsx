@@ -2,7 +2,7 @@ import React, { useRef, useEffect} from 'react'
 import Inbox from './Inbox'
 import Favorites from './Favorites'
 
-const InboxCarousel = () => {
+const Home = () => {
     const inboxRef = useRef(); 
     const favRef = useRef(); 
 
@@ -37,7 +37,7 @@ const InboxCarousel = () => {
 
     return (
         <div>
-            <div className="tabs w-screen flex justify-center fixed top-2">
+            <div className="tabs w-screen flex fixed lg:justify-start justify-center top-2">
                 <a className="inboxTab tab tab-bordered" onClick={handleInboxTab}>Inbox</a> 
                 <a className="favTab tab tab-bordered" onClick={handleFavTab}>Favorites</a> 
             </div>
@@ -56,4 +56,4 @@ const InboxCarousel = () => {
     )
 }
 
-export default InboxCarousel
+export default Home

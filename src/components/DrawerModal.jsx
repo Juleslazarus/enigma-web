@@ -8,10 +8,11 @@ import { auth, db } from './Firebase';
 import { signOut } from 'firebase/auth';
 import ChatList from './ChatList';
 import QuickLinks from './QuickLinks';
-import InboxCarousel from './InboxCarousel';
+import Home from './Home';
 
 const DrawerModal = () => {
-    let [inbox, setInbox] = useState(true); 
+    let [home, setHome] = useState(true); 
+    let [inbox, setInbox] = useState(false); 
     let [favorites, setFavorites] = useState(false); 
     let [chatList, setChatList] = useState(false); 
     let [settings, setSettings] = useState(false); 
@@ -21,7 +22,15 @@ const DrawerModal = () => {
     
 
     //? handle the drawer button states
+    let handleHomeOn = () => {
+        setHome(true); 
+        setFavorites(false); 
+        setChatList(false); 
+        setSettings(false); 
+        let closeDrawer = document.getElementById('closeDrawer').click()
+    }
     let handleInboxOn = () => {
+        setHome(false); 
         setInbox(true)
         setFavorites(false); 
         setChatList(false); 
@@ -29,6 +38,7 @@ const DrawerModal = () => {
         let closeDrawer = document.getElementById('closeDrawer').click()
     }
     let handleFavoritesOn = () => {
+        setHome(false); 
         setInbox(false); 
         setFavorites(true); 
         setChatList(false); 
@@ -37,6 +47,7 @@ const DrawerModal = () => {
     }
 /*  */
     let handleChatListOn = () => {
+        setHome(false); 
         setInbox(false); 
         setFavorites(false); 
         setChatList(true); 
@@ -45,6 +56,7 @@ const DrawerModal = () => {
     }
 /*  */
     let handleSettingsOn = () => {
+        setHome(false); 
         setInbox(false);
         setFavorites(false); 
         setChatList(false); 
@@ -53,24 +65,28 @@ const DrawerModal = () => {
     }
 
     let quickInboxOn = () => {
+        setHome(false); 
         setInbox(true)
         setFavorites(false); 
         setChatList(false); 
         setSettings(false); 
     }
     let quickFavoritesOn = () => {
+        setHome(false); 
         setInbox(false); 
         setFavorites(true); 
         setChatList(false); 
         setSettings(false); 
     }
     let quickChatListOn = () => {
+        setHome(false); 
         setInbox(false); 
         setFavorites(false); 
         setChatList(true); 
         setSettings(false); 
     }
     let quickSettingsOn = () => {
+        setHome(false); 
         setInbox(false);
         setFavorites(false); 
         setChatList(false); 
@@ -134,7 +150,8 @@ const DrawerModal = () => {
                 <QuickLinks quickInboxOn={quickInboxOn} quickFavoritesOn={quickFavoritesOn} quickSettingsOn={quickSettingsOn} quickChatListOn={quickChatListOn} />
             </div>
                 {/* <SearchModal/> */}
-                {inbox ? <InboxCarousel/> : null}
+                {home ? <Home/> : null}
+                {inbox ? <Inbox/> : null}
                 {favorites ? <Favorites/> : null}
                 {chatList ? <ChatList/> : null}
                 {settings ? <Settings/> : null}
