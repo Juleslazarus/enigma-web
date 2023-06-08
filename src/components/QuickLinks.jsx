@@ -10,8 +10,8 @@ const QuickLinks = ({quickInboxOn, quickFavoritesOn, quickChatListOn, quickSetti
                     <FaInbox/>
                 </i>
             </button>
-            <button className="bg-base-200 active:bg-base-300">
-                <i className='text-lg h-full w-full flex justify-center items-center'>
+            <button className="bg-base-200 active:bg-base-300 ">
+                <i className='text-xl h-full w-full flex justify-center items-center p-10'>
                     <CreateChat/>
                 </i>
             </button>
