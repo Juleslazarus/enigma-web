@@ -142,7 +142,7 @@ const DrawerModal = () => {
                 {/* different pages */}
                 <label className='header drawer-button flex items-center h-[5%] z-50'>
                     <label htmlFor='my-drawer' className=''>
-                        <i htmlFor='my-drawer' className=" text-2xl btn-ghost cursor-pointer lg:hidden fixed"><FaBars/></i>
+                        <i htmlFor='my-drawer' className=" text-2xl btn btn-primary btn-outline btn-circle fixed top-2 left-4 cursor-pointer lg:hidden hover:cursor-pointer"><FaBars/></i>
                     </label>
                 </label> 
             </div>  

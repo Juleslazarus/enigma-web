@@ -28,9 +28,6 @@ const App = () => {
         set(ref(db, `users/${uid}/`),{
           authStatus: 'Offline',
         })
-        .then(() => {
-          console.log('online'); 
-        })
     })
     })
     setTimeout(() => {
