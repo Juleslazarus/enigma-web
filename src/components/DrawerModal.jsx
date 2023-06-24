@@ -11,8 +11,7 @@ import QuickLinks from './QuickLinks';
 import Home from './Home';
 
 const DrawerModal = () => {
-    let [home, setHome] = useState(true); 
-    let [inbox, setInbox] = useState(false); 
+    let [inbox, setInbox] = useState(true); 
     let [favorites, setFavorites] = useState(false); 
     let [chatList, setChatList] = useState(false); 
     let [settings, setSettings] = useState(false); 
@@ -22,15 +21,8 @@ const DrawerModal = () => {
     
 
     //? handle the drawer button states
-    let handleHomeOn = () => {
-        setHome(true); 
-        setFavorites(false); 
-        setChatList(false); 
-        setSettings(false); 
-        let closeDrawer = document.getElementById('closeDrawer').click()
-    }
+   
     let handleInboxOn = () => {
-        setHome(false); 
         setInbox(true)
         setFavorites(false); 
         setChatList(false); 
@@ -38,7 +30,6 @@ const DrawerModal = () => {
         let closeDrawer = document.getElementById('closeDrawer').click()
     }
     let handleFavoritesOn = () => {
-        setHome(false); 
         setInbox(false); 
         setFavorites(true); 
         setChatList(false); 
@@ -47,7 +38,6 @@ const DrawerModal = () => {
     }
 /*  */
     let handleChatListOn = () => {
-        setHome(false); 
         setInbox(false); 
         setFavorites(false); 
         setChatList(true); 
@@ -56,7 +46,6 @@ const DrawerModal = () => {
     }
 /*  */
     let handleSettingsOn = () => {
-        setHome(false); 
         setInbox(false);
         setFavorites(false); 
         setChatList(false); 
@@ -65,28 +54,24 @@ const DrawerModal = () => {
     }
 
     let quickInboxOn = () => {
-        setHome(false); 
         setInbox(true)
         setFavorites(false); 
         setChatList(false); 
         setSettings(false); 
     }
     let quickFavoritesOn = () => {
-        setHome(false); 
         setInbox(false); 
         setFavorites(true); 
         setChatList(false); 
         setSettings(false); 
     }
     let quickChatListOn = () => {
-        setHome(false); 
         setInbox(false); 
         setFavorites(false); 
         setChatList(true); 
         setSettings(false); 
     }
     let quickSettingsOn = () => {
-        setHome(false); 
         setInbox(false);
         setFavorites(false); 
         setChatList(false); 
@@ -150,15 +135,14 @@ const DrawerModal = () => {
                 <QuickLinks quickInboxOn={quickInboxOn} quickFavoritesOn={quickFavoritesOn} quickSettingsOn={quickSettingsOn} quickChatListOn={quickChatListOn} />
             </div>
                 {/* <SearchModal/> */}
-                {home ? <Home/> : null}
                 {inbox ? <Inbox/> : null}
                 {favorites ? <Favorites/> : null}
                 {chatList ? <ChatList/> : null}
                 {settings ? <Settings/> : null}
                 {/* different pages */}
-                <label className='header drawer-button flex items-center h-[5%]'>
-                    <label htmlFor='my-drawer' className='p-2'>
-                        <i htmlFor='my-drawer' className=" text-1xl m-2 cursor-pointer lg:hidden"><FaBars/></i>
+                <label className='header drawer-button flex items-center h-[5%] z-50'>
+                    <label htmlFor='my-drawer' className=''>
+                        <i htmlFor='my-drawer' className=" text-2xl btn-ghost cursor-pointer lg:hidden fixed"><FaBars/></i>
                     </label>
                 </label> 
             </div>  

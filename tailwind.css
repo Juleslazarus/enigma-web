@@ -1782,6 +1782,18 @@ html {
   z-index: 20;
 }
 
+.z-50 {
+  z-index: 50;
+}
+
+.z-\[50\] {
+  z-index: 50;
+}
+
+.z-\[60\] {
+  z-index: 60;
+}
+
 .float-right {
   float: right;
 }
