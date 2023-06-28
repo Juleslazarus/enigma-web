@@ -155,7 +155,7 @@ const RegisterModal = () => {
 
                 </div>
                 <br></br>
-                <input type="file" className="file-input file-input-bordered file-input-primary w-full max-w-xs" />
+                <input type="file" className="file-input file-input-bordered file-input-primary w-full max-w-xs" placeholder='Set Profile Picture' />
                 <button className='btn btn-primary' onClick={userInputRegistration}>Sign Up</button>
                 <button className='btn btn-ghost'>Forgot Credentials</button>
             </div>
