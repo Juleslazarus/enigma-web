@@ -9,6 +9,9 @@ import { signOut } from 'firebase/auth';
 import ChatList from './ChatList';
 import QuickLinks from './QuickLinks';
 import Home from './Home';
+import CreateChat from './CreateChat';
+import CreateChatLG from './CreateChatLG'
+
 
 const DrawerModal = () => {
     let [inbox, setInbox] = useState(true); 
@@ -122,12 +125,21 @@ const DrawerModal = () => {
     }
 
     let signUserOut = () => {
+        auth.onAuthStateChanged(cred => {
+            let uid = cred.uid
+            set(ref(db, `users/${uid}/auth_status/`),{
+              authStatus: 'Offline',
+            })
+        })
         auth.signOut(); 
     }
 
 
   return (
       <div className='h-screen w-full overflow-hidden'>
+                    <div className='hidden lg:inline-block fixed top-2 right-4 text-2xl z-50'>
+                            <CreateChatLG/>
+                    </div>
         <div className="drawer drawer-mobile">
             <input id="my-drawer" type="checkbox" className="drawer-toggle" />
             <div className="modalWrapper drawer-content flex flex-col-reverse justify-end end">

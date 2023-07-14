@@ -15,7 +15,7 @@ const App = () => {
     auth.onAuthStateChanged(cred => {
         cred ? setUserAuth(true) : setUserAuth(false); 
         let uid = cred.uid 
-        set(ref(db, `users/${uid}/`),{
+        set(ref(db, `users/${uid}/auth_status/`),{
           authStatus: 'Online',
         })
           .then(() => {
@@ -25,7 +25,7 @@ const App = () => {
     window.addEventListener('beforeunload', () => {
       auth.onAuthStateChanged(cred => {
         let uid = cred.uid
-        set(ref(db, `users/${uid}/`),{
+        set(ref(db, `users/${uid}/auth_status/`),{
           authStatus: 'Offline',
         })
     })

@@ -25,23 +25,31 @@ const Inbox = () => {
 //     })
 // }
 
-  let retrieveMessages = () => {
+  let retrieveChatRooms = () => {
     auth.onAuthStateChanged(cred => {
       let uid = cred.uid; 
       let dbRef = ref(db); 
-      get(child(dbRef, `users/${uid}/chats/`))
-      .then(chats => {
-        console.log(chats.val())
-        chats.forEach(chat => {
-          console.log(chat.val().firstMsg)
+      let chatRoomQuery = query(ref(db, `users/${uid}/user_chat_rooms/`))
+      onValue(chatRoomQuery, chatRoomNode => {
+        chatRoomNode.forEach(chatRoomItem => {
+          console.log(chatRoomItem.val().chatName)
+          let chatRoomEl = document.createElement('div'); 
+          let chatRoomTitle = document.createElement('p')
+          chatRoomEl.classList.add('w-[100%]', 'h-[4rem]', 'bg-base-300', 'flex-col', 'justify-center', 'gap-2', 'whitespace-nowrap', 'p-2', 'm-2')
+          chatRoomTitle.classList.add('text-ellipsis', 'overflow-hidden')
+          chatRoomTitle.textContent = `${chatRoomItem.val().chatName}`
+          let chatRoomsCont = document.querySelector('.chatRoomsCont')
+          chatRoomsCont.appendChild(chatRoomEl); 
+          chatRoomEl.appendChild(chatRoomTitle)
         })
       })
-    })
-  }
+  })
+}
 
-  retrieveMessages(); 
+  retrieveChatRooms();
+
   return (
-      <div className='contactsCont flex flex-col items-center gap-2 p-2 overflow-hidden w-full'>
+      <div className='chatRoomsCont flex flex-col items-center gap-2 p-2 overflow-hidden w-full'>
         <div className='contact w-[100%] h-[4rem] bg-base-300 flex-col justify-center gap-2 whitespace-nowrap p-2 m-2'>
           <p className='userName h-[50%]'>Timothy  </p>
           <div>
