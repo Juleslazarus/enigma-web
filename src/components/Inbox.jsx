@@ -44,6 +44,7 @@ const Inbox = () => {
         })
       })
   })
+  console.log("chat rooms retrieved")
 }
 
   retrieveChatRooms();
